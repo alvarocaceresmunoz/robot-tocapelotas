@@ -1,7 +1,7 @@
 require 'telegram/bot'
-require '~/Documents/scripts/arduino/robotTocaPelotasReloaded/server/parser/tokenizer'
-require '~/Documents/scripts/arduino/robotTocaPelotasReloaded/server/robot_tocapelotas'
-require '~/Documents/scripts/arduino/robotTocaPelotasReloaded/server/parser/parser'
+require_relative 'robot_tocapelotas'
+require_relative 'parser/parser'
+require_relative 'parser/tokenizer'
 require 'stringio'
 
 token = '217002004:AAG5Nz_fRIjGPoYrwEAV7VTS0D_QPQ9dq4I'

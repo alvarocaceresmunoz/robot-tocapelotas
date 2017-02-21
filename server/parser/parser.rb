@@ -8,8 +8,8 @@ require 'racc/parser.rb'
 class Parser < Racc::Parser
 
 module_eval(<<'...end grammar.y/module_eval...', 'grammar.y', 46)
-  require '~/Documents/scripts/arduino/robotTocaPelotasReloaded/server/parser/handler'
-  require '~/Documents/scripts/arduino/robotTocaPelotasReloaded/server/parser/tokenizer'
+  require '~/Documents/scripts/arduino/robot-tocapelotas/server/parser/handler'
+  require '~/Documents/scripts/arduino/robot-tocapelotas/server/parser/tokenizer'
   #attr_reader :handler
 
   def initialize(t, h = Handler.new())

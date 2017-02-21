@@ -1,11 +1,11 @@
-require_relative 'parser'
-require_relative 'tokenizer'
+require '~/Documents/scripts/arduino/robot-tocapelotas/server/parser/handler'
+require '~/Documents/scripts/arduino/robot-tocapelotas/server/parser/tokenizer'
 require 'stringio'
 
 #code = 'time 4/4'
 #code = 'tempo 4 = 6'
-#code = ':m1 = s r s8 r s16 r'
-code = 'asodkamsda dplay :m1'
+code = ':m1 = s r s8 r s16 r'
+#code = 'asodkamsda dplay :m1'
 input   = StringIO.new(code)
 tok     = Tokenizer.new(input)
 parser  = Parser.new(tok)

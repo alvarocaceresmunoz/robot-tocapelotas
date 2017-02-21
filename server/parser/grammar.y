@@ -43,8 +43,8 @@ rule
 end
 
 ---- inner ----
-  require '~/Documents/scripts/arduino/robotTocaPelotasReloaded/server/parser/handler'
-  require '~/Documents/scripts/arduino/robotTocaPelotasReloaded/server/parser/tokenizer'
+  require '~/Documents/scripts/arduino/robot-tocapelotas/server/parser/handler'
+  require '~/Documents/scripts/arduino/robot-tocapelotas/server/parser/tokenizer'
   #attr_reader :handler
 
   def initialize(t, h = Handler.new())
