@@ -48,9 +48,8 @@ After this we knew that we could give users a (simple but) powerful live coding 
 
 ## Powering the robot
 
-We did not have any power supply, so we had to power the servos with batteries. 4 batteries of 1.5V seem to do the job quite well. Here are some pictures of the robot powered with batteries:
+We did not have any power supply, so we had to power the servos with batteries. 4 batteries of 1.5V seem to do the job quite well. Here there are some pictures of the robot powered with batteries:
 
-General view of the robot
 <img src="https://raw.githubusercontent.com/100303602/robot-tocapelotas/master/batteries1.jpg?token=APSbfe99s741-sWGtKt5S2uF9avdxhNBks5YwRKywA%3D%3D" width="300">
 
 <img src="https://raw.githubusercontent.com/100303602/robot-tocapelotas/master/batteries2.jpg?token=APSbfV2Pno8ZFaS1VRrEbkjszoFwXaWbks5YwRK0wA%3D%3D" width="300">
