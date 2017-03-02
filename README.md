@@ -62,13 +62,13 @@ In order to speak to the robot, you must send one of the following instructions:
 
 The basic unit of this language is the motif. A motif is a list of notes. When you play music with robot-tocapelotas, you will normally follow this workflow: you first create a motif (a set of notes), then you tell the robot to play that motive. To create a motif, you have to type the name you want to give to it, and making it equal to the list of notes you want (we'll get to the list of notes later):
 ```
-:mySuperCoolRhythm = s1 s8 r8 s8 s8 s4 s16 s16 s16 r2
+/robot :mySuperCoolRhythm = s1 s8 r8 s8 s8 s4 s16 s16 s16 r2
 ```
 The motif name should start with a colon (```:```), then contain a letter and then either letters or numbers, as many as you want. You can change a motif by defining it again; you could change the motif other users have created as well. That's exactly the funny part of all of this: you can improvise by modifying existing music, which gives a lot more of cohesion to the music, and which makes the jam session much more collaborative.
 
-To play the motif, type ```play``` followed by the name of your motif (remember that motifs start with colons)
+To play the motif, type ```/robot play``` followed by the name of your motif (remember that motifs start with colons)
 ```
-play :mySuperCoolRhythm
+/robot play :mySuperCoolRhythm
 ```
 You can play your motives as well as motives from your friends, if you are talking to the bot in the same group.
 
@@ -82,7 +82,7 @@ Right now you have the following pieces to hit:
 
 Now if we look at the example above:
 ```
-:mySuperCoolRhythm = s1 s8 r8 s8 s8 s4 s16 s16 s16 r2
+/robot :mySuperCoolRhythm = s1 s8 r8 s8 s8 s4 s16 s16 s16 r2
 ```
 We now we are telling to the robot something like *play the snare with a rhythm of a whole note, then a snare with a rhythm of an eigth note...*. If we translated the code into a score, it would look something like this:
 
@@ -94,19 +94,20 @@ Normally you want to send more than one note to the robot. A list of notes is ju
 
 There is some syntactic sugar that will make your life much easier when writing lists of notes. If several consecutive notes have the same rhythmic duration, you only have to specify the rhythm for the first note. Taking the example we used before, you could rewrite like this and save some typing:
 ```
-:mySuperCoolRhythm = s1 s8 r s s s4 s16 s s r2
+/robot :mySuperCoolRhythm = s1 s8 r s s s4 s16 s s r2
 ```
 Also, if part of your list contains notes that are repeated consecutively, you can group them into a repetition. For instance, with the example above we have an eighth note repeated twice, and a sixteenth note repeated twice. We could just rewrite the motive like this:
 ```
-:mySuperCoolRhythm = s1 s8 r sx2 s4 s16x2 r2
+/robot :mySuperCoolRhythm = s1 s8 r sx2 s4 s16x2 r2
 ```
 You can do the same with repetitions of several notes:
 ```
-:mySuperCoolRhythm = s1 s8 r sx2 (s4 s16)x2 r2
+/robot :mySuperCoolRhythm = s1 s8 r sx2 (s4 s16)x2 r2
 ```
 Or even put repetitions of repetitions!
 ```
-:mySuperCoolRhythm = (s8 s16x2 s8)x2 s8x3 (s16 s)x2
+/robot :mySuperCoolRhythm = (s8 s16x2 s8)x2 s8x3 (s16 s)x2
+/robot :anotherCoolRhythm = (s8 (s8 s16x2)x2)x3
 ```
 ## Known issues
 By now you should not send motives with more than 16 notes in total. Also, you should not send figures faster than sixteenth notes (like 32th notes, 64th notes and so on), as the servo motors cannot handle the speed required to play these rhythms.
