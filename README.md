@@ -84,7 +84,7 @@ To play the motif, type ```/robot play``` followed by the name of your motif (re
 ```
 You can play your motives as well as motives from your friends, if you are talking to the bot in the same group.
 
-## Notes INCOMPLETE
+## Notes
 
 A note has two parts: the piece you want the robot to hit, and a number that describes the duration of the note in traditional notation (4 is a quarter note, 8. is a dotted eighth note, etc). Make sure you write the piece and the rhythm without spaces in between. Also, notice that you can only add one dot to your notes (you cannot write things like ```s9...```).
 
