@@ -46,6 +46,10 @@ For instance, if several consecutive notes had the same rhythm, it was only nece
 
 After this we knew that we could give users a (simple but) powerful live coding language to be used with the robot: tocapelotas-lang.
 
+## Powering the robot
+
+We did not have any power supply, so we had to power the servos with batteries. 4 batteries of 1.5V seem to do the job quite well. Here are some pictures of them:
+
 # Manual
 
 ## Install
@@ -56,7 +60,7 @@ Actually there is nothing to install if you already have Telegram (you can use i
 
 In order to speak to the robot, you must send one of the following instructions:
 - ```/help```: It shows code examples
-- ```/robot ...```: It sends to the robot any code you write after the word ```-robot```
+- ```/robot ...```: It sends to the robot any code you write after the word ```/robot```
 
 ## Motives
 
