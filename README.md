@@ -10,7 +10,7 @@ robot-tocapelotas is a robot (created by Sergio Pérez and Álvaro Cáceres) tha
 
 robot-tocapelotas is the result of a crazy experiment carried out at the [2016 UC3Music Hackathon](https://www.youtube.com/watch?v=Jok2oPczdf8) (we are the third team in the video). [UC3Music](http://uc3music.github.io/) is the society for DIY electronics, robotics and music from Universidad Carlos III de Madrid; once a year they organice a hackathon where the goal is to come up with a musical instrument that uses either robots or electronics, given a limited amount of hours, electronics, any kind of trash, and *a surprise component* we had to integrate into the instrument. Our surprise component was a penguin hand puppet, (although all of us know that it is actually [Tux](https://en.wikipedia.org/wiki/Tux)). We used it as mere decoration, but anyway...
 
-<img src="https://github.com/100303602/robot-tocapelotas/blob/master/yeah-put-that.jpg" width="400">
+<img src="https://raw.githubusercontent.com/100303602/robot-tocapelotas/master/yeah-put-that.jpg?token=APSbfcn7TLKKjRPL_QaYNNItupd8RhLuks5YwObrwA%3D%3D" width="400">
 
 ## The initial solution
 
@@ -28,7 +28,7 @@ With all its limitations, the robot was seen with enthusiasm at the hackathon. *
 
 First thing we did after the hackathon was to incorporate rhythm to notes, as well as defining both notes and rests explicitly. Sending notes to the Arduino in the form of a *grid* was easy to implement, but it obliged users to write much more than what they would have written on a score (compare these two notations; with score noation you only need to write 7 notes, whereas with grid notation you have to write 16):
 
-<img src="https://github.com/100303602/robot-tocapelotas/blob/master/grid-vs-score-notation.jpg" width="400">
+<img src="https://raw.githubusercontent.com/100303602/robot-tocapelotas/master/grid-vs-score-notation.jpg?token=APSbfXEcr0VR9STbBcyZ0Kq75OF7CClzks5YwOaJwA%3D%3D" width="400">
 
 Writing so many characters even for simple rhythms would be fatal in terms of user experience, since most of the users will likely use the smartphone for sending messages to the robot... imagine sending a really complex rhythm, realizing you have one extra character, rewrite it again... Also, another problem of that notation would be that it would assume a constant division of the bar: this means, if we assume the bar is divied in a 4-pieces grid, how can I fit a triplet into the bar?
 
@@ -72,7 +72,7 @@ Right now you have the following typies of pieces to smash:
 
 Changing the tempo can make your jam much more interesting, since you can slow down and then gain more speed at the end of the song (that was an example: the possibilities are endless). But before learning the syntax, it's important to know how is the tempo normally expressed in traditional notation (the notation you can find on scores or guitar tabs). Tempo is normally expressed like this:
 
-<img src="https://github.com/100303602/robot-tocapelotas/blob/master/tempo-example.jpg" width="400">
+<img src="https://raw.githubusercontent.com/100303602/robot-tocapelotas/master/tempo-example.jpg?token=APSbfThJdQZ1FoTu3XZQDPvquAi6TofLks5YwOa3wA%3D%3D" width="400">
 
 # Future improvements:
 - Allowing motives with more than 16 notes: right now you can only send small chunks of notes; more specifically, you can only send 16 notes in total (that is, after applying repetitions). This happens because the server translates all code into a set of fixed-length strinhs that the Arduino can read pretty fast. Arduino communicates with the server via serial port, which by default accepts chunks of 64 Bytes; each note is represented by 4 Bytes, so you can only send 64/4 = 16 notes at once to the robot. The Telegram bot will notify you with an error message if your motif exceeds the number of notes, though.
