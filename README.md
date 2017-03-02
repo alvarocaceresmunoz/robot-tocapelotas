@@ -48,7 +48,13 @@ After this we knew that we could give users a (simple but) powerful live coding 
 
 ## Powering the robot
 
-We did not have any power supply, so we had to power the servos with batteries. 4 batteries of 1.5V seem to do the job quite well. Here are some pictures of them:
+We did not have any power supply, so we had to power the servos with batteries. 4 batteries of 1.5V seem to do the job quite well. Here are some pictures of the robot powered with batteries:
+
+General view of the robot
+<img src="" width="300">
+<img src="" width="300">
+<img src="" width="300">
+<img src="" width="300">
 
 # Manual
 
@@ -118,7 +124,7 @@ By now you should not send motives with more than 16 notes in total. Also, you s
 
 # Demo
 
-[Here](https://www.youtube.com/watch?v=dQw4w9WgXcQ) you can watch a demo of the robot in action!
+[Here](https://www.youtube.com/watch?v=vuBKAEIBxeM) you can watch a demo of the robot in action!
 
 # Future improvements:
 - Allowing motives with more than 16 notes: right now you can only send small chunks of notes; more specifically, you can only send 16 notes in total (that is, after applying repetitions). This happens because the server translates all code into a set of fixed-length strinhs that the Arduino can read pretty fast. Arduino communicates with the server via serial port, which by default accepts chunks of 64 Bytes; each note is represented by 4 Bytes, so you can only send 64/4 = 16 notes at once to the robot. The Telegram bot will notify you with an error message if your motif exceeds the number of notes, though.
