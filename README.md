@@ -52,8 +52,11 @@ We did not have any power supply, so we had to power the servos with batteries. 
 
 General view of the robot
 <img src="https://raw.githubusercontent.com/100303602/robot-tocapelotas/master/batteries1.jpg?token=APSbfe99s741-sWGtKt5S2uF9avdxhNBks5YwRKywA%3D%3D" width="300">
+
 <img src="https://raw.githubusercontent.com/100303602/robot-tocapelotas/master/batteries2.jpg?token=APSbfV2Pno8ZFaS1VRrEbkjszoFwXaWbks5YwRK0wA%3D%3D" width="300">
+
 <img src="https://raw.githubusercontent.com/100303602/robot-tocapelotas/master/batteries3.jpg?token=APSbfdcqyFvPlucHkyUFP5bKjUuIfhQRks5YwRK1wA%3D%3D" width="300">
+
 <img src="https://raw.githubusercontent.com/100303602/robot-tocapelotas/master/batteries4.jpg?token=APSbfWJFdeZWp3V0QPLGJaVA1FtdSyafks5YwRK4wA%3D%3D" width="300">
 
 # Manual
