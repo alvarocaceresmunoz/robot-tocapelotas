@@ -86,7 +86,7 @@ Now if we look at the example above:
 ```
 We now we are telling to the robot something like *play the snare with a rhythm of a whole note, then a snare with a rhythm of an eigth note...*. If we translated the code into a score, it would look something like this:
 
-<img src="https://raw.githubusercontent.com/100303602/robot-tocapelotas/master/grid-vs-score-notation.jpg?token=APSbfXEcr0VR9STbBcyZ0Kq75OF7CClzks5YwOaJwA%3D%3D" width="300">
+<img src="https://raw.githubusercontent.com/100303602/robot-tocapelotas/master/notes-example.jpg?token=APSbfWuQ_gQn5z2-xSGtm8e4V4Bx-9n8ks5YwQgTwA%3D%3D" width="300">
 
 ## List of notes
 
