@@ -34,7 +34,7 @@ Writing so many characters even for simple rhythms would be fatal in terms of us
 
 Our solution was to use a syntax similar to that of [LilyPond](http://lilypond.org/), a programming language for typesetting music scores. That is, we first put the name of the note, and then we put a number that represented the rhythm in classical notation (where 1 means a whole note, 4 means a quarter note, and so on). Translating the rhythmic number of a note to its duration knowing the tempo can be easily calculated with a rule of three. With the possibility of having different rhythms, the music produced with the bot was becoming more and more intersting.
 
-## Adding a lexer / parser
+## Adding a parser
 
 As the language became more complex, we realized that it was not viable to use the server script or the low-level programming (and resources) of the Arduino to parse the strings received from the messages. We also realized that everything was way simpler to program in Ruby than in Arduino, and we had much more resources (RAM, CPU) on the server; this means that it was easier to process the messages from users and transform them into something easier to read for the Arduino (like a set of fixed-lenght operations: *servo1 up, servo1 down, servo2 up...*).
 
@@ -46,7 +46,7 @@ For instance, if several consecutive notes had the same rhythm, it was only nece
 
 After this we knew that we could give users a (simple but) powerful live coding language to be used with the robot: tocapelotas-lang.
 
-# How to use it
+# Manual
 
 ## Install
 
@@ -56,33 +56,64 @@ Actually there is nothing to install if you already have Telegram (you can use i
 
 In order to speak to the robot, you must send one of the following instructions:
 - ```/help```: It shows code examples
-- ```/robot myCode```: It 
+- ```/robot ...```: It sends to the robot any code you write after the word ```-robot```
 
-## Motives INCOMPLETE
+## Motives
 
-The basic unit of this language is the motif. A motif is a list of notes. When you play music with robot-tocapelotas, you will normally follow this workflow: you first create a motif (a set of notes), then you tell the robot to play that motive. For creating a motif, you have to type the name you want to give to your motif, and making it equal to the list of notes you want (we'll get to the list of notes later):
+The basic unit of this language is the motif. A motif is a list of notes. When you play music with robot-tocapelotas, you will normally follow this workflow: you first create a motif (a set of notes), then you tell the robot to play that motive. To create a motif, you have to type the name you want to give to it, and making it equal to the list of notes you want (we'll get to the list of notes later):
 ```
-:mySuperCoolRhythm = s1 s8 s s s s4 s16 s s r2
+:mySuperCoolRhythm = s1 s8 r8 s8 s8 s4 s16 s16 s16 r2
 ```
-The motif name should start with a colon (```:```), then with a letter and then with either letters or numbers, as many as you want. Once you have defined your motif you can always change it later by defining it again, or you could change the motif other users have created (that's exactly the funny part of all of this: you can improvise by modifying existing music, which gives a lot more of cohesion to the music, and which makes the jam session much more collaborative).
+The motif name should start with a colon (```:```), then contain a letter and then either letters or numbers, as many as you want. You can change a motif by defining it again; you could change the motif other users have created as well. That's exactly the funny part of all of this: you can improvise by modifying existing music, which gives a lot more of cohesion to the music, and which makes the jam session much more collaborative.
 
-To play the motif, you just have to type ```play``` followed by the name of your motif (remember that motifs start with colons)
+To play the motif, type ```play``` followed by the name of your motif (remember that motifs start with colons)
 ```
 play :mySuperCoolRhythm
 ```
+You can play your motives as well as motives from your friends, if you are talking to the bot in the same group.
 
-## Lists of notes INCOMPLETE
+## Notes INCOMPLETE
 
-A note makes reference to the type of piece you want the robot to hit, immediately followed by a number that describes the duration of the note in traditional notation.
-Right now you have the following typies of pieces to smash:
+A note has two parts: the piece you want the robot to hit, and a number that describes the duration of the note in traditional notation (4 is a quarter note, 8. is a dotted eighth note, etc). Make sure you write the piece and the rhythm without spaces in between. Also, notice that you can only add one dot to your notes (you cannot write things like ```s9...```).
+
+Right now you have the following pieces to hit:
 - Snare drum: denoted by the letter *s*
 - Rest: this is equivalent to not playing anything. It is denoted by the letter *r*
 
-## Changing tempo INCOMPLETE
+Now if we look at the example above:
+```
+:mySuperCoolRhythm = s1 s8 r8 s8 s8 s4 s16 s16 s16 r2
+```
+We now we are telling to the robot something like *play the snare with a rhythm of a whole note, then a snare with a rhythm of an eigth note...*. If we translated the code into a score, it would look something like this:
 
-Changing the tempo can make your jam much more interesting, since you can slow down and then gain more speed at the end of the song (that was an example: the possibilities are endless). But before learning the syntax, it's important to know how is the tempo normally expressed in traditional notation (the notation you can find on scores or guitar tabs). Tempo is normally expressed like this:
+<img src="https://raw.githubusercontent.com/100303602/robot-tocapelotas/master/grid-vs-score-notation.jpg?token=APSbfXEcr0VR9STbBcyZ0Kq75OF7CClzks5YwOaJwA%3D%3D" width="300">
 
-<img src="https://raw.githubusercontent.com/100303602/robot-tocapelotas/master/tempo-example.jpg?token=APSbfThJdQZ1FoTu3XZQDPvquAi6TofLks5YwOa3wA%3D%3D" width="200">
+## List of notes
+
+Normally you want to send more than one note to the robot. A list of notes is just... well, a list of notes, separated by spaces (you can put as many of them as you want).
+
+There is some syntactic sugar that will make your life much easier when writing lists of notes. If several consecutive notes have the same rhythmic duration, you only have to specify the rhythm for the first note. Taking the example we used before, you could rewrite like this and save some typing:
+```
+:mySuperCoolRhythm = s1 s8 r s s s4 s16 s s r2
+```
+Also, if part of your list contains notes that are repeated consecutively, you can group them into a repetition. For instance, with the example above we have an eighth note repeated twice, and a sixteenth note repeated twice. We could just rewrite the motive like this:
+```
+:mySuperCoolRhythm = s1 s8 r sx2 s4 s16x2 r2
+```
+You can do the same with repetitions of several notes:
+```
+:mySuperCoolRhythm = s1 s8 r sx2 (s4 s16)x2 r2
+```
+Or even put repetitions of repetitions!
+```
+:mySuperCoolRhythm = (s8 s16x2 s8)x2 s8x3 (s16 s)x2
+```
+## Known issues
+By now you should not send motives with more than 16 notes in total. Also, you should not send figures faster than sixteenth notes (like 32th notes, 64th notes and so on), as the servo motors cannot handle the speed required to play these rhythms.
+
+# Demo
+
+[Here](https://www.youtube.com/watch?v=dQw4w9WgXcQ) you can watch a demo of the robot in action!
 
 # Future improvements:
 - Allowing motives with more than 16 notes: right now you can only send small chunks of notes; more specifically, you can only send 16 notes in total (that is, after applying repetitions). This happens because the server translates all code into a set of fixed-length strinhs that the Arduino can read pretty fast. Arduino communicates with the server via serial port, which by default accepts chunks of 64 Bytes; each note is represented by 4 Bytes, so you can only send 64/4 = 16 notes at once to the robot. The Telegram bot will notify you with an error message if your motif exceeds the number of notes, though.
@@ -101,3 +132,4 @@ Changing the tempo can make your jam much more interesting, since you can slow d
 - Adding nuances (levels of intensity) and accents to the robots
 - Allowing to do ritardandos and accelerandos
 - Adding triplets, quintuplets, or simply n-tuplets
+- Adding tempo and time signature change
