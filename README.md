@@ -129,7 +129,6 @@ By now you should not send motives with more than 16 notes in total. Also, you s
 [Here](https://www.youtube.com/watch?v=vuBKAEIBxeM) you can watch a demo of the robot in action!
 
 # Future improvements:
-- Allowing motives with more than 16 notes: right now you can only send small chunks of notes; more specifically, you can only send 16 notes in total (that is, after applying repetitions). This happens because the server translates all code into a set of fixed-length strinhs that the Arduino can read pretty fast. Arduino communicates with the server via serial port, which by default accepts chunks of 64 Bytes; each note is represented by 4 Bytes, so you can only send 64/4 = 16 notes at once to the robot. The Telegram bot will notify you with an error message if your motif exceeds the number of notes, though.
 - Integrating a metronome: so that users could keep track of the time signature
 - Allowing users to switch the metronome on / off
 - Adding functions to the grammar: this would be extremely powerful
