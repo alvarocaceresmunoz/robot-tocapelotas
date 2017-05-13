@@ -7,14 +7,14 @@
 require 'racc/parser.rb'
 class Parser < Racc::Parser
 
-module_eval(<<'...end grammar.y/module_eval...', 'grammar.y', 46)
-  require '~/Documents/scripts/arduino/robot-tocapelotas/server/parser/handler'
-  require '~/Documents/scripts/arduino/robot-tocapelotas/server/parser/tokenizer'
+module_eval(<<'...end grammar.y/module_eval...', 'grammar.y', 51)
+  #require '~/Documents/repos/robot-tocapelotas/server/parser/handler'
+  require '~/Documents/repos/robot-tocapelotas/server/parser/tokenizer'
   #attr_reader :handler
 
-  def initialize(t, h = Handler.new())
+  def initialize(t)#, h = Handler.new())
     @tokenizer = t
-    @handler = h
+    #@handler = h
     @current_rhythm = fix_length('4',2) + '_'
     @current_snare = 's'
     super()
@@ -29,7 +29,8 @@ module_eval(<<'...end grammar.y/module_eval...', 'grammar.y', 46)
   end
 
   def get_arduino_string(r)
-    return @handler.result(r)
+    #return @handler.result(r)
+    return r
   end
 
   def fix_length(s, l)
@@ -53,66 +54,73 @@ module_eval(<<'...end grammar.y/module_eval...', 'grammar.y', 46)
 ##### State transition tables begin ###
 
 racc_action_table = [
-     6,    10,    11,    12,     7,     8,     9,    13,    14,    15,
-    16,    17,    20,    21,    22,    23,    24,    25,    29,    20,
-    31,    32,    20,    34,    29,    37 ]
+    31,    31,    31,    10,    34,    11,    12,    13,    29,    29,
+    29,    41,     6,    14,    15,    16,     7,     8,     9,    17,
+    20,    21,    22,    23,    24,    25,    20,    33,    34,    35,
+    20,    38,    40,    43,    44,    45 ]
 
 racc_action_check = [
-     0,     1,     6,     7,     0,     0,     0,     8,     9,    10,
-    11,    12,    13,    14,    16,    17,    18,    19,    22,    23,
-    24,    26,    28,    31,    32,    34 ]
+    22,    29,    34,     1,    36,     6,     7,     8,    22,    29,
+    34,    36,     0,     9,    10,    11,     0,     0,     0,    12,
+    13,    14,    16,    17,    18,    19,    23,    24,    26,    28,
+    30,    33,    35,    38,    41,    44 ]
 
 racc_action_pointer = [
-    -2,     1,   nil,   nil,   nil,   nil,    -3,    -2,     2,     3,
-     9,     1,     7,     8,    11,   nil,     9,     5,    11,     6,
-   nil,   nil,    15,    15,    11,   nil,    16,   nil,    18,   nil,
-   nil,    18,    21,   nil,    21,   nil,   nil,   nil ]
+    10,     3,   nil,   nil,   nil,   nil,     0,     1,     2,     8,
+    14,     6,    15,    16,    19,   nil,    17,    10,    19,    11,
+   nil,   nil,    -3,    22,    18,   nil,    23,   nil,    19,    -2,
+    26,   nil,   nil,    26,    -1,    28,    -1,   nil,    29,   nil,
+   nil,    24,   nil,   nil,    31,   nil ]
 
 racc_action_default = [
-   -18,   -18,    -1,    -2,    -3,    -4,   -18,   -18,   -18,   -18,
-   -18,   -18,   -18,   -18,   -18,    38,   -18,   -18,   -18,   -13,
-   -16,   -15,   -18,   -18,   -18,   -14,    -5,    -7,    -9,   -10,
-   -11,   -18,   -18,    -8,   -18,    -6,   -12,   -17 ]
+   -21,   -21,    -1,    -2,    -3,    -4,   -21,   -21,   -21,   -21,
+   -21,   -21,   -21,   -21,   -21,    46,   -21,   -21,   -21,   -16,
+   -19,   -18,   -21,   -21,   -21,   -17,    -5,    -7,   -10,   -21,
+   -12,   -13,   -14,   -21,   -21,   -21,   -21,   -11,   -21,    -6,
+    -8,   -21,   -15,   -20,   -21,    -9 ]
 
 racc_goto_table = [
-    18,    27,     1,     2,     3,     4,     5,    26,    36,   nil,
-    30,    35,   nil,   nil,   nil,    33 ]
+    18,    26,     1,     2,     3,     4,     5,    39,    36,    42,
+    32,   nil,   nil,   nil,   nil,   nil,   nil,    37 ]
 
 racc_goto_check = [
-     9,     7,     1,     2,     3,     4,     5,     6,    10,   nil,
-     9,     7,   nil,   nil,   nil,     9 ]
+    10,     6,     1,     2,     3,     4,     5,     7,     6,    11,
+    10,   nil,   nil,   nil,   nil,   nil,   nil,    10 ]
 
 racc_goto_pointer = [
-   nil,     2,     3,     4,     5,     6,   -15,   -21,   nil,   -13,
-   -26,   nil ]
+   nil,     2,     3,     4,     5,     6,   -21,   -27,   nil,   nil,
+   -13,   -29,   nil ]
 
 racc_goto_default = [
-   nil,   nil,   nil,   nil,   nil,   nil,   nil,   nil,    28,   nil,
-   nil,    19 ]
+   nil,   nil,   nil,   nil,   nil,   nil,   nil,    27,    28,    30,
+   nil,   nil,    19 ]
 
 racc_reduce_table = [
   0, 0, :racc_error,
-  1, 13, :_reduce_1,
-  1, 13, :_reduce_2,
-  1, 13, :_reduce_3,
-  1, 13, :_reduce_4,
-  5, 16, :_reduce_5,
-  3, 18, :_reduce_6,
-  1, 18, :_reduce_none,
-  2, 19, :_reduce_8,
-  1, 19, :_reduce_9,
-  1, 20, :_reduce_10,
-  5, 14, :_reduce_11,
-  7, 15, :_reduce_12,
-  1, 21, :_reduce_13,
-  2, 21, :_reduce_14,
-  3, 17, :_reduce_15,
-  1, 23, :_reduce_16,
-  1, 22, :_reduce_17 ]
+  1, 16, :_reduce_1,
+  1, 16, :_reduce_2,
+  1, 16, :_reduce_3,
+  1, 16, :_reduce_4,
+  5, 19, :_reduce_5,
+  3, 21, :_reduce_6,
+  1, 21, :_reduce_none,
+  3, 22, :_reduce_8,
+  5, 22, :_reduce_9,
+  1, 22, :_reduce_none,
+  2, 23, :_reduce_11,
+  1, 23, :_reduce_12,
+  1, 24, :_reduce_13,
+  5, 17, :_reduce_14,
+  7, 18, :_reduce_15,
+  1, 25, :_reduce_16,
+  2, 25, :_reduce_17,
+  3, 20, :_reduce_18,
+  1, 27, :_reduce_19,
+  1, 26, :_reduce_20 ]
 
-racc_reduce_n = 18
+racc_reduce_n = 21
 
-racc_shift_n = 38
+racc_shift_n = 46
 
 racc_token_table = {
   false => 0,
@@ -125,10 +133,13 @@ racc_token_table = {
   :TEMPO => 7,
   :PLAY => 8,
   "=" => 9,
-  "/" => 10,
-  "." => 11 }
+  "x" => 10,
+  "(" => 11,
+  ")" => 12,
+  "/" => 13,
+  "." => 14 }
 
-racc_nt_base = 12
+racc_nt_base = 15
 
 racc_use_result_var = true
 
@@ -159,6 +170,9 @@ Racc_token_to_s_table = [
   "TEMPO",
   "PLAY",
   "\"=\"",
+  "\"x\"",
+  "\"(\"",
+  "\")\"",
   "\"/\"",
   "\".\"",
   "$start",
@@ -168,6 +182,7 @@ Racc_token_to_s_table = [
   "motif",
   "play",
   "list",
+  "repetition",
   "note",
   "piece_type",
   "rhythm",
@@ -226,21 +241,37 @@ module_eval(<<'.,.,', 'grammar.y', 13)
 
 module_eval(<<'.,.,', 'grammar.y', 17)
   def _reduce_8(val, _values, result)
+    result = val[0]*val[2].to_i()
+    result
+  end
+.,.,
+
+module_eval(<<'.,.,', 'grammar.y', 18)
+  def _reduce_9(val, _values, result)
+    result = val[1]*val[4].to_i()
+    result
+  end
+.,.,
+
+# reduce 10 omitted
+
+module_eval(<<'.,.,', 'grammar.y', 22)
+  def _reduce_11(val, _values, result)
      result = val[0] + val[1]
                               @current_rhythm = val[1]
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'grammar.y', 19)
-  def _reduce_9(val, _values, result)
+module_eval(<<'.,.,', 'grammar.y', 24)
+  def _reduce_12(val, _values, result)
     result = val[0] + @current_rhythm
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'grammar.y', 22)
-  def _reduce_10(val, _values, result)
+module_eval(<<'.,.,', 'grammar.y', 27)
+  def _reduce_13(val, _values, result)
      aux = val[0]
                             if aux != 'r'
                               aux = distribute_hands(val[0])
@@ -251,50 +282,50 @@ module_eval(<<'.,.,', 'grammar.y', 22)
   end
 .,.,
 
-module_eval(<<'.,.,', 'grammar.y', 29)
-  def _reduce_11(val, _values, result)
+module_eval(<<'.,.,', 'grammar.y', 34)
+  def _reduce_14(val, _values, result)
     result = 't' + val[2] + val[4]
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'grammar.y', 31)
-  def _reduce_12(val, _values, result)
+module_eval(<<'.,.,', 'grammar.y', 36)
+  def _reduce_15(val, _values, result)
     result = 'T'+','+val[2]+','+val[6]
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'grammar.y', 33)
-  def _reduce_13(val, _values, result)
+module_eval(<<'.,.,', 'grammar.y', 38)
+  def _reduce_16(val, _values, result)
     result = val[0] + '_'
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'grammar.y', 34)
-  def _reduce_14(val, _values, result)
+module_eval(<<'.,.,', 'grammar.y', 39)
+  def _reduce_17(val, _values, result)
     result = val[0] + val[1]
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'grammar.y', 37)
-  def _reduce_15(val, _values, result)
+module_eval(<<'.,.,', 'grammar.y', 42)
+  def _reduce_18(val, _values, result)
     result = val[2]
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'grammar.y', 39)
-  def _reduce_16(val, _values, result)
+module_eval(<<'.,.,', 'grammar.y', 44)
+  def _reduce_19(val, _values, result)
     result = fix_length(val[0], 2)
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'grammar.y', 41)
-  def _reduce_17(val, _values, result)
+module_eval(<<'.,.,', 'grammar.y', 46)
+  def _reduce_20(val, _values, result)
     result = fix_length(val[0], 3)
     result
   end

@@ -11,21 +11,27 @@ rule
 
   motif : VARIABLE_NAME SPACE '=' SPACE list {result = [val[0][0..-1], val[4]]};
 
-  list  : list SPACE note {result = val[0] + val[2]}
-        | note
+  list  : list SPACE repetition {result = val[0] + val[2]}
+        | repetition
         ;
+
+  repetition  : note 'x' INTEGER {result = val[0]*val[2].to_i()}
+              | '(' list ')' 'x' INTEGER {result = val[1]*val[4].to_i()}
+              | note
+              ;
 
   note  : piece_type rhythm { result = val[0] + val[1]
                               @current_rhythm = val[1]}
         | piece_type {result = val[0] + @current_rhythm}
         ;
 
-  piece_type : PIECE_TYPE { aux = val[0]
-                            if aux != 'r'
-                              aux = distribute_hands(val[0])
-                            end
-                            result = aux
-                          };
+  piece_type  : PIECE_TYPE  { aux = val[0]
+                                if aux != 'r'
+                                  aux = distribute_hands(val[0])
+                                end
+                              result = aux
+                            }
+              ;
 
   time_change : TIME SPACE INTEGER '/' rhythm {result = 't' + val[2] + val[4]};
 
@@ -43,13 +49,13 @@ rule
 end
 
 ---- inner ----
-  require '~/Documents/scripts/arduino/robot-tocapelotas/server/parser/handler'
-  require '~/Documents/scripts/arduino/robot-tocapelotas/server/parser/tokenizer'
+  #require '~/Documents/repos/robot-tocapelotas/server/parser/handler'
+  require '~/Documents/repos/robot-tocapelotas/server/parser/tokenizer'
   #attr_reader :handler
 
-  def initialize(t, h = Handler.new())
+  def initialize(t)#, h = Handler.new())
     @tokenizer = t
-    @handler = h
+    #@handler = h
     @current_rhythm = fix_length('4',2) + '_'
     @current_snare = 's'
     super()
@@ -64,7 +70,8 @@ end
   end
 
   def get_arduino_string(r)
-    return @handler.result(r)
+    #return @handler.result(r)
+    return r
   end
 
   def fix_length(s, l)
